@@ -1,159 +1,556 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Formulaire Quizen Investissement</title>
-  <style>
-    body {
-      background: linear-gradient(to bottom right, #0a4d4d, #e0e0e0);
-      font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
-      color: #333;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QUIZEN INVESTISSEMENT - Formulaire d'Investissement</title>
 
-    h1 {
-      text-align: center;
-      color: #0a4d4d;
-      margin-bottom: 30px;
-    }
+<!-- Polices élégantes -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
-    form {
-      background: white;
-      padding: 25px;
-      border-radius: 10px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
+<style>
+  /* RESET */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: linear-gradient(135deg, #283618, #53675a, #9dbf9e);
+    background-size: 300% 300%;
+    animation: bgGradient 30s ease infinite;
+    color: #e0e6d4;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 15px;
+  }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-    }
+  @keyframes bgGradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
+  .container {
+    background: rgba(33, 47, 33, 0.85);
+    border-radius: 24px;
+    max-width: 900px;
+    width: 100%;
+    padding: 48px 60px 56px 60px;
+    box-shadow:
+      0 12px 25px rgba(83,103,90,0.3),
+      inset 0 0 40px rgba(157,191,158,0.3);
+    border: 1.5px solid #7a9a79;
+    position: relative;
+    overflow: hidden;
+  }
 
-    canvas {
-      width: 100%;
-      height: 150px;
-      border: 1px solid #ccc;
-      margin-top: 5px;
-    }
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  header h1 {
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 3.8rem;
+    letter-spacing: 0.12em;
+    color: #a5bf9a;
+    text-shadow:
+      0 0 10px #a5bf9aaa,
+      0 0 20px #c9e2b9bb;
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeUp 1.5s ease forwards;
+  }
+  header p {
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 600;
+    margin-top: 8px;
+    color: #c3d4bc;
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeUp 1.5s ease forwards;
+    animation-delay: 0.3s;
+  }
 
-    button {
-      background-color: #0a4d4d;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 
-    .message {
-      display: none;
-      text-align: center;
-      margin-top: 20px;
-      background: #d4edda;
-      color: #155724;
-      padding: 15px;
-      border-radius: 8px;
+  label {
+    margin-top: 28px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #b1c4a7;
+    opacity: 0;
+    transform: translateX(-15px);
+    animation: fadeSlideLeft 0.9s ease forwards;
+  }
+  /* Delay animation progressive sur les labels */
+  label:nth-of-type(1) {animation-delay: 0.4s;}
+  label:nth-of-type(2) {animation-delay: 0.55s;}
+  label:nth-of-type(3) {animation-delay: 0.7s;}
+  label:nth-of-type(4) {animation-delay: 0.85s;}
+  label:nth-of-type(5) {animation-delay: 1s;}
+  label:nth-of-type(6) {animation-delay: 1.15s;}
+  label:nth-of-type(7) {animation-delay: 1.3s;}
+  label:nth-of-type(8) {animation-delay: 1.45s;}
+  label:nth-of-type(9) {animation-delay: 1.6s;}
+  label:nth-of-type(10) {animation-delay: 1.75s;}
+  label:nth-of-type(11) {animation-delay: 1.9s;}
+  label:nth-of-type(12) {animation-delay: 2.05s;}
+  label:nth-of-type(13) {animation-delay: 2.2s;}
+  label:nth-of-type(14) {animation-delay: 2.35s;}
+  label:nth-of-type(15) {animation-delay: 2.5s;}
+  label:nth-of-type(16) {animation-delay: 2.65s;}
+  label:nth-of-type(17) {animation-delay: 2.8s;}
+  label:nth-of-type(18) {animation-delay: 2.95s;}
+
+  input, select, textarea {
+    margin-top: 10px;
+    padding: 16px 22px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1.1rem;
+    background: rgba(255,255,255,0.07);
+    color: #dbe9c4;
+    box-shadow:
+      inset 2px 2px 8px rgba(0,0,0,0.3),
+      inset -1px -1px 5px rgba(255,255,255,0.1);
+    transition:
+      background-color 0.4s ease,
+      box-shadow 0.4s ease,
+      color 0.4s ease,
+      transform 0.3s ease;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #acc89a;
+    font-style: italic;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    background-color: #a5bf9a;
+    color: #25321d;
+    box-shadow:
+      0 0 20px 3px #a5bf9a99;
+    transform: scale(1.05);
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  button[type="submit"] {
+    margin-top: 44px;
+    background-color: #8ca984;
+    color: #1e2c1b;
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: 20px 0;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    letter-spacing: 0.12em;
+    box-shadow:
+      0 6px 12px rgba(140,169,132,0.6);
+    transition:
+      background-color 0.35s ease,
+      box-shadow 0.5s ease,
+      transform 0.3s ease;
+  }
+  button[type="submit"]:hover {
+    background-color: #a5bf9a;
+    box-shadow:
+      0 0 32px 10px #a5bf9aaa;
+    transform: scale(1.1);
+  }
+  button[type="submit"]:active {
+    transform: scale(0.98);
+  }
+
+  /* Signature pad style */
+  #signature-container {
+    margin-top: 22px;
+    border: 3px solid #a5bf9a;
+    border-radius: 16px;
+    width: 100%;
+    height: 210px;
+    background-color: #f1f8e9;
+    cursor: crosshair;
+    box-shadow:
+      inset 1px 1px 8px #9cbf95,
+      0 4px 12px #a5bf9a88;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+  }
+  #signature-container:hover {
+    box-shadow:
+      inset 1px 1px 12px #a5bf9aee,
+      0 6px 20px #a5bf9aff;
+  }
+  #signature-pad {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    background-color: transparent;
+  }
+  #clear-signature {
+    margin-top: 12px;
+    background-color: #7f9a70;
+    color: #1e2c1b;
+    font-weight: 700;
+    padding: 14px 26px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+  }
+  #clear-signature:hover {
+    background-color: #a5bf9a;
+  }
+
+  /* Checkbox */
+  label.checkbox-label {
+    margin-top: 34px;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #d4e1b6;
+    user-select: none;
+  }
+  label.checkbox-label a {
+    color: #a5bf9a;
+    text-decoration: underline;
+  }
+  input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+  /* Message de confirmation */
+  #confirmation-message {
+    margin-top: 42px;
+    background-color: #36482fdd;
+    padding: 28px 36px;
+    border-radius: 24px;
+    color: #b9d3a4;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-align: center;
+    box-shadow: 0 0 22px #b9d3a4cc;
+    display: none;
+    animation: fadeInScale 0.8s ease forwards;
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(25px);
     }
-  </style>
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeSlideLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .container {
+      padding: 38px 24px 48px 24px;
+    }
+    header h1 {
+      font-size: 3rem;
+    }
+    button[type="submit"] {
+      font-size: 1.25rem;
+      padding: 18px 0;
+    }
+  }
+</style>
 </head>
+
 <body>
+  <main class="container" role="main" aria-labelledby="form-title" tabindex="-1">
+    <header>
+      <h1 id="form-title">QUIZEN INVESTISSEMENT</h1>
+      <p>Investir avec Confiance et Expertise</p>
+    </header>
 
-  <h1>Quizen Investissement - Formulaire</h1>
+    <form id="form-quizen" novalidate aria-describedby="confirmation-message">
+      <label for="nom">Nom *</label>
+      <input type="text" id="nom" name="nom" required placeholder="Votre nom complet" autocomplete="name" />
 
-  <form action="https://formsubmit.co/factquizen@gmail.com" method="POST" enctype="multipart/form-data" onsubmit="return showThankYou(event)">
-    
-    <label>Nom</label>
-    <input type="text" name="Nom" id="nom" required>
+      <label for="prenom">Prénom *</label>
+      <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom" autocomplete="given-name" />
 
-    <label>Prénom</label>
-    <input type="text" name="Prenom" id="prenom" required>
+      <label for="age">Âge *</label>
+      <input type="number" id="age" name="age" min="18" max="120" required placeholder="Votre âge" />
 
-    <label>Âge</label>
-    <input type="number" name="Age" required>
+      <label for="pays">Pays *</label>
+      <input type="text" id="pays" name="pays" required placeholder="Votre pays de résidence" autocomplete="country" />
 
-    <label>Pays</label>
-    <input type="text" name="Pays" required>
+      <label for="ville">Ville *</label>
+      <input type="text" id="ville" name="ville" required placeholder="Votre ville" autocomplete="address-level2" />
 
-    <label>Ville</label>
-    <input type="text" name="Ville" required>
+      <label for="sexe">Sexe *</label>
+      <select id="sexe" name="sexe" required>
+        <option value="" disabled selected>-- Choisir --</option>
+        <option value="Femme">Femme</option>
+        <option value="Homme">Homme</option>
+        <option value="Autre">Autre</option>
+      </select>
 
-    <label>Sexe</label>
-    <select name="Sexe" required>
-      <option value="">-- Choisir --</option>
-      <option value="Femme">Femme</option>
-      <option value="Homme">Homme</option>
-      <option value="Autre">Autre</option>
-    </select>
+      <label for="profession">Profession *</label>
+      <input type="text" id="profession" name="profession" required placeholder="Votre profession" autocomplete="organization" />
 
-    <label>Profession</label>
-    <input type="text" name="Profession" required>
+      <label for="telephone">Téléphone WhatsApp *</label>
+      <input type="tel" id="telephone" name="telephone" required pattern="[\d\s\+\-\(\)]+" placeholder="+221 77 000 0000" title="Numéro valide" autocomplete="tel" />
 
-    <label>Pièce d’identité (recto)</label>
-    <input type="file" name="Photo_Recto" accept="image/*" required>
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required placeholder="exemple@email.com" autocomplete="email" />
 
-    <label>Pièce d’identité (verso)</label>
-    <input type="file" name="Photo_Verso" accept="image/*" required>
+      <label for="objectif">Objectif d’investissement</label>
+      <textarea id="objectif" name="objectif" rows="3" placeholder="Optionnel"></textarea>
 
-    <label>Signature</label>
-    <canvas id="signatureCanvas" required></canvas>
-    <input type="hidden" name="Signature" id="signatureInput">
+      <label for="source">Comment avez-vous connu le service ? *</label>
+      <input type="text" id="source" name="source" required placeholder="Réseaux sociaux, ami, pub..." />
 
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="box">
+      <label for="investi_deja">Avez-vous déjà investi en ligne auparavant ? *</label>
+      <select id="investi_deja" name="investi_deja" required>
+        <option value="" disabled selected>-- Choisir --</option>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
 
-    <button type="submit">Envoyer la demande</button>
+      <label for="montant_recu">Si oui, combien avez-vous reçu ? *</label>
+      <input type="number" id="montant_recu" name="montant_recu" required placeholder="Montant reçu (en USD ou FCFA)" />
 
-    <div id="thankYouMessage" class="message"></div>
-  </form>
+      <label for="type_gain">Quel type de gain préférez-vous ? *</label>
+      <select id="type_gain" name="type_gain" required>
+        <option value="" disabled selected>-- Choisir --</option>
+        <option value="Petits gains stables et sécurisés">Petits gains stables et sécurisés</option>
+        <option value="Moyens gains avec un peu de risque">Moyens gains avec un peu de risque</option>
+        <option value="Gros gains rapides avec plus de risque">Gros gains rapides avec plus de risque</option>
+      </select>
+
+      <label for="delai_benefices">En combien d’heures souhaitez-vous recevoir vos bénéfices ? *</label>
+      <select id="delai_benefices" name="delai_benefices" required>
+        <option value="" disabled selected>-- Choisir --</option>
+        <option value="Moins de 1 heure">Moins de 1 heure</option>
+        <option value="1h à 3h">1h à 3h</option>
+        <option value="3h à 6h">3h à 6h</option>
+        <option value="6h à 12h">6h à 12h</option>
+        <option value="12h à 24h">12h à 24h</option>
+        <option value="Plus de 24h">Plus de 24h</option>
+      </select>
+
+      <label for="moyen_paiement">Moyen de paiement préféré *</label>
+      <select id="moyen_paiement" name="moyen_paiement" required>
+        <option value="" disabled selected>-- Choisir --</option>
+        <option value="Orange Money">Orange Money</option>
+        <option value="Wave">Wave</option>
+        <option value="MoMo">MoMo</option>
+        <option value="Carte bancaire">Carte bancaire</option>
+        <option value="Skrill">Skrill</option>
+        <option value="PayPal">PayPal</option>
+        <option value="Autre">Autre</option>
+      </select>
+
+      <label for="disponibilite_echange">Moment disponible pour échanger *</label>
+      <select id="disponibilite_echange" name="disponibilite_echange" required>
+        <option value="" disabled selected>-- Choisir --</option>
+        <option value="Matin (8h–12h)">Matin (8h–12h)</option>
+        <option value="Après-midi (12h–17h)">Après-midi (12h–17h)</option>
+        <option value="Soir (17h–21h)">Soir (17h–21h)</option>
+      </select>
+
+      <label for="selfie">Prenez un selfie (photo récente) *</label>
+      <input type="file" id="selfie" name="selfie" accept="image/*" required />
+
+      <label for="piece_identite_recto">Photo recto de votre pièce d’identité ou autre carte prouvant votre identité *</label>
+      <input type="file" id="piece_identite_recto" name="piece_identite_recto" accept="image/*" required />
+
+      <label for="piece_identite_verso">Photo verso de votre pièce d’identité ou autre carte prouvant votre identité *</label>
+      <input type="file" id="piece_identite_verso" name="piece_identite_verso" accept="image/*" required />
+
+      <label for="signature-pad">Veuillez dessiner votre signature manuscrite *</label>
+      <div id="signature-container" aria-label="Zone de signature manuscrite">
+        <canvas id="signature-pad" aria-required="true" role="textbox" aria-describedby="sign-info"></canvas>
+      </div>
+      <button type="button" id="clear-signature" aria-label="Effacer la signature">Effacer la signature</button>
+
+      <div id="sign-info" style="font-size:0.9rem; color:#b1c4a7; margin-top:4px; font-style: italic;">
+        Veuillez signer avec votre souris ou votre doigt (sur mobile).
+      </div>
+
+      <button type="submit">Envoyer la demande</button>
+    </form>
+
+    <div id="confirmation-message" role="alert" tabindex="0"></div>
+  </main>
 
   <script>
-    const canvas = document.getElementById("signatureCanvas");
-    const ctx = canvas.getContext("2d");
+    // Signature Pad setup
+    const canvas = document.getElementById('signature-pad');
+    const ctx = canvas.getContext('2d');
     let drawing = false;
+    let lastPos = { x: 0, y: 0 };
 
-    canvas.addEventListener("mousedown", () => drawing = true);
-    canvas.addEventListener("mouseup", () => {
-      drawing = false;
-      ctx.beginPath();
+    // Fix canvas size to container size
+    function resizeCanvas() {
+      const container = document.getElementById('signature-container');
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+      clearCanvas();
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function clearCanvas() {
+      ctx.fillStyle = "#f1f8e9";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "#344d26";
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+    }
+    clearCanvas();
+
+    function getMousePos(evt) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+      };
+    }
+
+    function getTouchPos(evt) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: evt.touches[0].clientX - rect.left,
+        y: evt.touches[0].clientY - rect.top
+      };
+    }
+
+    canvas.addEventListener('mousedown', e => {
+      drawing = true;
+      lastPos = getMousePos(e);
     });
-    canvas.addEventListener("mousemove", drawSignature);
-
-    function drawSignature(e) {
+    canvas.addEventListener('mouseup', e => {
+      drawing = false;
+    });
+    canvas.addEventListener('mouseout', e => {
+      drawing = false;
+    });
+    canvas.addEventListener('mousemove', e => {
       if (!drawing) return;
-      ctx.lineWidth = 2;
-      ctx.lineCap = "round";
-      ctx.strokeStyle = "#000";
-      ctx.lineTo(e.offsetX, e.offsetY);
-      ctx.stroke();
+      const pos = getMousePos(e);
       ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
+      ctx.moveTo(lastPos.x, lastPos.y);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      lastPos = pos;
+    });
+
+    // Touch events
+    canvas.addEventListener('touchstart', e => {
+      e.preventDefault();
+      drawing = true;
+      lastPos = getTouchPos(e);
+    });
+    canvas.addEventListener('touchend', e => {
+      e.preventDefault();
+      drawing = false;
+    });
+    canvas.addEventListener('touchcancel', e => {
+      e.preventDefault();
+      drawing = false;
+    });
+    canvas.addEventListener('touchmove', e => {
+      e.preventDefault();
+      if (!drawing) return;
+      const pos = getTouchPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastPos.x, lastPos.y);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      lastPos = pos;
+    });
+
+    document.getElementById('clear-signature').addEventListener('click', e => {
+      clearCanvas();
+    });
+
+    // Form submission with validation for signature presence
+    const form = document.getElementById('form-quizen');
+    const confirmation = document.getElementById('confirmation-message');
+
+    function isCanvasBlank(cnv) {
+      const blank = document.createElement('canvas');
+      blank.width = cnv.width;
+      blank.height = cnv.height;
+      return cnv.toDataURL() === blank.toDataURL();
     }
 
-    function showThankYou(event) {
+    form.addEventListener('submit', function(event) {
       event.preventDefault();
-      const nom = document.getElementById("nom").value;
-      const prenom = document.getElementById("prenom").value;
-      document.getElementById("signatureInput").value = canvas.toDataURL();
-      const message = document.getElementById("thankYouMessage");
-      message.innerText = `Merci ${prenom} ${nom}, votre demande a bien été envoyée !`;
-      message.style.display = "block";
-      setTimeout(() => event.target.submit(), 2000);
-      return false;
-    }
-  </script>
 
+      // Validate standard HTML5 required fields
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Validate signature presence
+      if (isCanvasBlank(canvas)) {
+        alert('Veuillez signer dans la zone de signature avant de soumettre.');
+        return;
+      }
+
+      // Ici tu peux faire le traitement : envoyer les données, générer PDF, envoyer mail, etc.
+      // Pour la démo, on affiche un message de confirmation avec prénom + nom
+
+      const prenom = form.prenom.value.trim();
+      const nom = form.nom.value.trim();
+
+      confirmation.textContent = `Merci ${prenom} ${nom} pour votre demande. Nous vous contacterons rapidement.`;
+      confirmation.style.display = 'block';
+
+      // Scroll vers le message
+      confirmation.focus();
+
+      // Réinitialiser le formulaire + signature
+      form.reset();
+      clearCanvas();
+    });
+  </script>
 </body>
 </html>
